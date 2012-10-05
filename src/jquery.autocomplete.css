@@ -1,0 +1,64 @@
+div.ac { 
+	border-style: solid;
+	border-width: 1px;
+	border-color: gray;
+	position: absolute;
+	display: none;
+	overflow: auto;
+}
+
+div.ac > ul {
+	margin: 0px;
+	padding: 0px;
+}
+
+div.ac > ul > li {
+	margin: 0px;
+	list-style-type: none;
+	background-color: white;
+	word-break: break-all;
+	font-family: helvetica, arial, "Courier New", sans-serif;
+}
+
+div.ac > ul > li > div {
+	display: table-row;
+	width: 100%;
+}
+
+div.ac > ul > li > div em {
+	background-color: #B0E2FF;
+	font-style: normal;
+}
+
+div.ac > ul > li.normal {
+	padding: 2px 0px 2px 2px;
+}
+
+div.ac > ul > li.normal > div > span{
+	display: table-cell;
+	vertical-align: middle;
+}
+
+div.ac > ul > li.iconList {
+	padding: 0px 0px 0px 2px;
+}
+
+div.ac > ul > li.iconList > div > div {
+	display: table-cell;
+	vertical-align: middle;
+	padding-right: 5px;
+}
+
+div.ac > ul > li.iconList > div > div > img {
+	display: table;
+	display: table-cell\9;
+}   
+
+div.ac > ul > li.iconList > div > span {
+	display: table-cell;
+	vertical-align: middle;
+}
+
+div.ac > ul > li.selected {
+	background-color: #DCDCDC;
+}
