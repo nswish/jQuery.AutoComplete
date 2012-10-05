@@ -147,6 +147,7 @@
                         }];
 
             $.each(teams, function(index, data){
+                new Image().src = '../demo/image/2012中超/' + data['value'] + '.jpg'; // 预加载图片
                 data['image'] = '../demo/image/2012中超/' + data['value'] + '.jpg';
             });
 
@@ -175,22 +176,22 @@
 </head>
 <body>
     <div style="background-color:black;height:40px;margin-bottom:10px;">
-        <div style="width:1000px;margin:auto;height:100%;color:white;"><span style="font-size:20px;line-height:40px;">jQuery.AutoComplete</span><a href="../doc/index.html" style="float:right;line-height:40px;color:white;font-size:12px;">API文档</a></div>
+        <div style="width:1000px;margin:auto;height:100%;color:white;"><span style="font-size:20px;line-height:40px;">jQuery.AutoComplete</span><span style="float:right;line-height:40px;"><a href="../doc/index.html" style="color:white;font-size:12px;text-decoration:none;" target="_blank">API文档</a>&nbsp;&nbsp;&nbsp;<a href="https://github.com/nswish/jQuery.AutoComplete" style="color:white;font-size:12px;text-decoration:none;" target="_blank">源代码</a></span></div>
     </div>
     <div style="width:1000px;margin:auto;">
         <div style="display:table-cell;">
             <div style="height:503px;width:330px;">
-                <input type="text" id="down" value="e"></input><span style="font-weight:bold;">补全列表在下方</span>
+                <input type="text" id="down" value="e"></input><span style="font-weight:bold;font-size:13px;">补全列表在下方</span>
             </div>
             <div>
-                <input type="text" id="up" value="e"></input>补全列表在上方
+                <input type="text" id="up" value="e"></input><span style="font-weight:bold;font-size:13px;">补全列表在上方</span>
             </div>
         </div>
         <div style="display:table-cell;width:330px;">
-            <input type="text" id="iconlist" value="c"></input>图标文本样式
+            <input type="text" id="iconlist" value="c"></input><span style="font-weight:bold;font-size:13px;">图标文本样式</span>
         </div>
         <div style="display:table-cell;width:330px;">
-            <input type="text" id="custom" value="队"></input>自定义样式
+            <input type="text" id="custom" value="队"></input><span style="font-weight:bold;font-size:13px;">自定义样式</span>
         </div>
     </div>
 </body>
