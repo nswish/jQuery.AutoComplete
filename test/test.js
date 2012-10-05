@@ -84,7 +84,6 @@ alltest.testIconList = function(input){
         result = [];
     
     $.each(world, function(index, name){
-        new Image().src = '../demo/image/worldFlag/' + name + '.png'; // 预加载图片
         result.push({
             'value': name,
             'label': name,
@@ -106,7 +105,6 @@ alltest.testIconListUp = function(input){
         result = [];
     
     $.each(world, function(index, name){
-        new Image().src = '../demo/image/worldFlag/' + name + '.png'; // 预加载图片
         result.push({
             'value': name,
             'label': name,
