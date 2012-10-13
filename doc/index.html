@@ -152,12 +152,12 @@
             <li>- <a href="#emphasis">emphasis</a></li>
         </ul>
 
-        <a class="toc_title" href="#event">
+        <a class="toc_title" href="#debug">
             调试
         </a>
 
         <ul class="toc_section">
-            <li>- <a href="#debug">debug</a></li>
+            <li>- <a href="#onerror">onerror</a></li>
         </ul>
     </div>
 
@@ -181,11 +181,15 @@
                 <li>支持'json'和'xml'两种数据格式。</li>
                 <li>支持异步处理。</li>
                 <li>支持错误调试。</li>
+                <li>支持jQuery1.7.1+。</li>
             </ul>
         </p>
 
-        <p>支持jQuery1.7.1+
-        </p>
+        在Html文件的</head>标签之前，引入插件:
+        <pre class="prettyprint">
+&lt;script type="text/javascript" src="/path/to/jquery-1.7.1.min.js"&gt;&lt;/script&gt;            
+&lt;link rel="stylesheet" type="text/css" href="/path/to/jquery.autocomplete.css"&gt;&lt;/link&gt;
+&lt;script type="text/javascript" src="/path/to/jquery.autocomplete.js"&gt;&lt;/script&gt;</pre>
 
         一个简单的例子: <input type="text" id="sample"></input>
         <pre class="prettyprint">
