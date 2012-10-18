@@ -7,6 +7,13 @@ alltest.testWidth = function(input){
     });
 };
 
+alltest.testWidthAuto = function(input){
+    $(input).AutoComplete({
+        'data': ['One', 'Two', 'Three', 'Four', 'Five', 'Six', 'Seven', 'Eight', 'Nine', 'Ten', 'Eleven', 'Twelve'],
+        'width': 'auto'
+    });
+};
+
 alltest.testItemHeight = function(input){
     $(input).AutoComplete({
         'data': ['One', 'Two', 'Three', 'Four', 'Five', 'Six', 'Seven', 'Eight', 'Nine', 'Ten', 'Eleven', 'Twelve'],
