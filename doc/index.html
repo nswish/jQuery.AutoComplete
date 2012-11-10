@@ -26,6 +26,7 @@
         $(document).ready(function(){
             // style
             prepareDemo('#widthInput', '#widthPre', 'testWidth');
+            prepareDemo('#widthAutoInput', '#widthAutoPre', 'testWidthAuto');
             prepareDemo('#maxHeightInput', '#maxHeightPre', 'testMaxHeight');
             prepareDemo('#itemHeightInput', '#itemHeightPre', 'testItemHeight');
             prepareDemo('#listStyleNormalInput', '#listStyleNormalPre', 'testListStyleNormal');
@@ -65,7 +66,7 @@
 <body>
     <div id="sidebar" class="interface">
         <a class="toc_title" href="#">
-	        jQuery.AutoComplete <span class="version">(1.0.0)</span>
+	        jQuery.AutoComplete <span class="version">(1.1.0)</span>
 	    </a>
 
 	    <a class="toc_title" href="#">
@@ -159,6 +160,14 @@
         <ul class="toc_section">
             <li>- <a href="#onerror">onerror</a></li>
         </ul>
+ 
+         <a class="toc_title" href="#changelog">
+            ChangeLog
+        </a>
+
+        <ul class="toc_section">
+            <li><a href="#v1.1.0">v1.1.0</a></li>
+        </ul>
     </div>
 
 	<div class="container">
@@ -205,15 +214,15 @@ $('#sample').AutoComplete({
 
     	<table>
       		<tr>
-        		<td><a href="../src/jquery.autocomplete.js">jquery.autocomplete.js (1.0.0)</a></td>
+        		<td><a href="../src/jquery.autocomplete.js">jquery.autocomplete.js (1.1.0)</a></td>
         		<td><i>16kb, 未经压缩，带有注释</i></td>
       		</tr>
       		<tr>
-        		<td><a href="../src/jquery.autocomplete.min.js">jquery.autocomplete.min.js (1.0.0)</a></td>
+        		<td><a href="../src/jquery.autocomplete.min.js">jquery.autocomplete.min.js (1.1.0)</a></td>
         		<td><i>8kb, 使用<a href="http://www.ostools.net/jscompress">开源中国在线工具</a>压缩</i></td>
       		</tr>
             <tr>
-                <td><a href="../src/jquery.autocomplete.css">jquery.autocomplete.css (1.0.0)</a></td>
+                <td><a href="../src/jquery.autocomplete.css">jquery.autocomplete.css (1.1.0)</a></td>
                 <td><i>2kb</td>
             </tr>            
     	</table>
@@ -223,13 +232,18 @@ $('#sample').AutoComplete({
 
       		<p id="width">
         		<b class="header">width</b><span class="title">列表的宽度。</span><br />
-        		<span class="default"><tt>类型：数字</tt><tt>默认值: 320</tt><tt>单位: px</tt></span>
+        		<span class="default"><tt>类型：数字，字符串</tt><tt>默认值: 320</tt><tt>单位: px</tt></span>
         		<br />
-                当列表宽度不足以容纳下列表项的内容时，列表项的文本以折行的方式显示。可以通过设定足够大的列表宽度，避免折行的发生。
+                当列表宽度不足以容纳下列表项的内容时，列表项的文本以折行的方式显示。可以通过设定足够大的列表宽度，避免折行的发生。<br />
+                [since v1.1.0]如果设定 width 为 'auto'，那么补全列表的宽度与输入框的宽度一致。
       		</p>
-            示例: <input id="widthInput" type="text"></input>
+            示例: 宽度设为数字 <input id="widthInput" type="text"></input>
       		<pre id="widthPre" class="prettyprint">
 			</pre>
+
+            示例: 宽度设为'auto' <input id="widthAutoInput" type="text"></input>
+            <pre id="widthAutoPre" class="prettyprint">
+            </pre>            
 
             <p id="maxHeight">
                 <b class="header">maxHeight</b><span class="title">列表的最大高度。</span><br />
@@ -449,6 +463,13 @@ $('#sample').AutoComplete({
                 <pre class="prettyprint" style="margin-top:0px;margin-bottom:5px;">function onerror(msg)</pre> 
             </p>
             <p style="margin-top:60px;">jQuery.AutoComplete使用<a href="http://www.sublimetext.com/">Sublime Text 2</a>完成所有代码、样例及文档的编写。</p>
+
+            <h2 id="changelog">ChangeLog</h2>
+
+            <h3 id='v1.1.0'>v1.1.0</h3>
+            <ul>
+                <li>当参数width设定为'auto'时，补全列表的宽度可自动适配输入框的宽度。</li>
+            </ul>
         </div>
     </div>
 </body>

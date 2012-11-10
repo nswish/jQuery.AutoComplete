@@ -1,5 +1,5 @@
 /*
-* jQuery.autocomplete.js (v1.0.0)
+* jQuery.autocomplete.js (v1.1.0)
 * authored by nswish (nswish@gmail.com)
 * jQuery 1.7.1+ support
 * compatible: ie/chrome/firefox/opera/safari
@@ -36,7 +36,7 @@
     var Controller = function(input, option){
         this.option = $.extend(false, {
             // style
-            'width': 320,                                   // number
+            'width': 320,                                   // number, string 'auto'
             'maxHeight': null,                              // number
             'itemHeight': null,                             // number
             'listStyle': 'normal',                          // string 'normal', 'iconList', 'custom'
@@ -145,8 +145,7 @@
             container = this.searchView.find('ul').empty();
 
         if ($.inArray(this.option.listStyle, ['normal', 'iconList', 'custom']) == -1) {
-            _error.apply(that, ['遇到未知的listStyle参数！']);
-            return;
+            throw ['遇到未知的listStyle参数！'];
         };
 
         $.each(result, function(index, data){
@@ -178,13 +177,22 @@
         } else if(this.option.listDirection === 'up'){
             var top = this.inputView.offset().top - this.searchView.outerHeight();
         } else {
-            _error.apply(this, ['遇到未知的listDirection参数！']);
-            return;
+            throw '遇到未知的listDirection参数！';
         }
 
         var left = this.inputView.offset().left;
         this.searchView.css("top", top+"px").css("left", left+"px");
     };
+
+    var _calcWidth = function(){
+        if(typeof(this.option.width) === 'string' && this.option.width.toLowerCase() === 'auto'){
+            return this.inputView.outerWidth() - 2;
+        } else if(typeof(this.option.width) === 'number'){
+            return this.option.width;
+        } else {
+            throw '遇到未知的width参数！';
+        }
+    }
 
     var _showSearchView = function(result){
         var that = this;
@@ -192,18 +200,28 @@
         if(this.option.listDirection === 'up')
             result = result.reverse();
     
-        _createItems.apply(that, [result]);//console.log("length="+this.searchView.find('li').size());
+        try{
+            _createItems.apply(that, [result]);//console.log("length="+this.searchView.find('li').size());
 
-        if(this.option.maxHeight > 0){
-            this.searchView.css('max-height', this.option.maxHeight+"px");
-            if($.browser.msie){
-                this.searchView.css("height", this.searchView.height() > this.option.maxHeight ? this.option.maxHeight+"px" : "auto");
+            if(this.option.maxHeight > 0){
+                this.searchView.css('max-height', this.option.maxHeight+"px");
+                if($.browser.msie){
+                    this.searchView.css("height", this.searchView.height() > this.option.maxHeight ? this.option.maxHeight+"px" : "auto");
+                }
             }
+
+            // 定位补全列表
+            _locateSearchView.apply(this);
+
+            // 计算并设定补全列表的宽度
+            this.searchView.css("width", _calcWidth.apply(this)+'px');
+
+        } catch(ex) {
+            _error.apply(this, [ex+'']);
+            return;
         }
 
-        _locateSearchView.apply(that);
-
-        this.searchView.css("width", this.option.width+'px').show();
+        this.searchView.show();
 
         _move.apply(this, [this.option.listDirection]);
     };
