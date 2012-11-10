@@ -1,5 +1,5 @@
 /*
-* jQuery.autocomplete.js (v1.0.0)
+* jQuery.autocomplete.js (v1.1.0)
 * authored by nswish (nswish@gmail.com)
 * jQuery 1.7.1+ support
 * compatible: ie/chrome/firefox/opera/safari
