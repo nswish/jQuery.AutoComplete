@@ -17,3 +17,6 @@ jQuery.AutoComplete是一个基于jQuery的自动补全插件。借助于jQuery�
 * 支持'json'和'xml'两种数据格式。
 * 支持异步处理。
 * 支持错误调试。
+
+演示地址：http://work.jiani.info/jQuery.AutoComplete/demo/    
+文档地址：http://work.jiani.info/jQuery.AutoComplete/doc/  
