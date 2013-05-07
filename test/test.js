@@ -56,35 +56,35 @@ alltest.testMaxHeight = function(input){
         'data': ['One', 'Two', 'Three', 'Four', 'Five', 'Six', 'Seven', 'Eight', 'Nine', 'Ten', 'Eleven', 'Twelve'],
         'maxHeight': 100
     });
-}
+};
 
 alltest.testMaxItems = function(input){
     $(input).AutoComplete({
         'data': ['One', 'Two', 'Three', 'Four', 'Five', 'Six', 'Seven', 'Eight', 'Nine', 'Ten', 'Eleven', 'Twelve'],
         'maxItems': 3
     });
-}
+};
 
 alltest.testUpDirection = function(input){
     $(input).AutoComplete({
         'data': ['One', 'Two', 'Three', 'Four', 'Five', 'Six', 'Seven', 'Eight', 'Nine', 'Ten', 'Eleven', 'Twelve'],
         'listDirection': 'up'
     });
-}
+};
 
 alltest.testDownDirection = function(input){
     $(input).AutoComplete({
         'data': ['One', 'Two', 'Three', 'Four', 'Five', 'Six', 'Seven', 'Eight', 'Nine', 'Ten', 'Eleven', 'Twelve'],
         'listDirection': 'down'
     });
-}
+};
 
 alltest.testListStyleNormal = function(input){
     $(input).AutoComplete({
         'data': ['One', 'Two', 'Three', 'Four', 'Five', 'Six', 'Seven', 'Eight', 'Nine', 'Ten', 'Eleven', 'Twelve'],
         'listStyle': 'normal'
     });
-}
+};
 
 alltest.testIconList = function(input){
     var world = ['Cambodia', 'Cameroon', 'Canada', 'Cape-Verde', 'Cayman-Islands', 'Central-African-Republic', 'Chad', 'Chile', 'China', 'Colombia', 'Commonwealth', 'Comoros', 'Costa-Rica', "Cote-d'Ivoire", 'Croatia', 'Cuba', 'Cyprus', 'Czech-Republic'],
@@ -106,7 +106,7 @@ alltest.testIconList = function(input){
         'width': 280,
         'onerror': function(msg){alert(msg);}
     });
-}
+};
 
 alltest.testIconListUp = function(input){
     var world = ['Cambodia', 'Cameroon', 'Canada', 'Cape-Verde', 'Cayman-Islands', 'Central-African-Republic', 'Chad', 'Chile', 'China', 'Colombia', 'Commonwealth', 'Comoros', 'Costa-Rica', "Cote-d'Ivoire", 'Croatia', 'Cuba', 'Cyprus', 'Czech-Republic'],
@@ -130,7 +130,7 @@ alltest.testIconListUp = function(input){
         'maxHeight': 240,
         'onerror': function(msg){alert(msg);}
     });
-}
+};
 
 alltest.testListStyleCustom = function(input){
     $(input).AutoComplete({
@@ -142,7 +142,7 @@ alltest.testListStyleCustom = function(input){
         },
         'onerror': function(msg){alert(msg);}
     });
-}
+};
 
 alltest.testOtherHandlersExistAfterDestroy = function(input){
     $(input).AutoComplete({
@@ -169,7 +169,7 @@ alltest.testEmphasisHandler = function(input){
             data.label = data.label.replace(regex, "<span style='font-weight:bold;color:blue;'>$1</span>");
         }
     });    
-}
+};
 
 alltest.testAsyncTrue = function(input){
     $(input).AutoComplete({
@@ -177,4 +177,15 @@ alltest.testAsyncTrue = function(input){
         'async': true,
         'onerror': function(msg){alert(msg);}
     });
-}
+};
+
+alltest.testBeforeLoadData = function(input){
+    $(input).AutoComplete({
+        'data': "../test/data.json",
+        'async': true,
+        'beforeLoadDataHandler' : function(keyword){
+            return keyword.length > 3;
+        },
+        'onerror': function(msg){alert(msg);}
+    });
+};

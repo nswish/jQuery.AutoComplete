@@ -1,5 +1,5 @@
 /*
-* jQuery.autocomplete.js (v1.1.0)
+* jQuery.autocomplete.js (v1.1.1)
 * authored by nswish (nswish@gmail.com)
 * jQuery 1.7.1+ support
 * compatible: ie/chrome/firefox/opera/safari
@@ -52,6 +52,7 @@
             'matchHandler': defaultMatchHandler,            // function
             'emphasisHandler': defaultEmphasisHandler,      // function
             'createItemHandler': null,                      // function
+            'beforeLoadDataHandler': null,                  // function
             // behavior
             'async': false,                                 // bool
             'emphasis': true,                               // bool
@@ -317,6 +318,7 @@
         var that = this,
             keyword = this.inputView.val(),
             data = [],
+            loadDataFlag = true,
             result = [];
 
         if($.trim(keyword).length == 0){
@@ -324,20 +326,37 @@
             return;
         }
 
-        if ($.isArray(this.option.data)) {
-            data = this.option.data;
-        } else if ($.isFunction(this.option.data)) {
-            data = this.option.data.apply(this, [keyword]);
-        } else if (typeof(this.option.data) === 'string') {
+        // invoke beforeLoadDataHandler if exists
+        if ($.isFunction(this.option.beforeLoadDataHandler)) {
             try{
-                data = _ajaxSend.apply(this, [keyword]);
+                loadDataFlag = this.option.beforeLoadDataHandler.apply(this, [keyword]);
             } catch(e) {
-                _error.apply(this, ['Ajax错误:'+e]);
+                _error.apply(this, ['调用beforeLoadDataHandler错误:'+e]);
                 return;
             }
-        } else {
-            _error.apply(this, ['遇到未知的data参数！']);
-            return;
+        }
+
+        if (loadDataFlag){
+            if ($.isArray(this.option.data)) {
+                data = this.option.data;
+            } else if ($.isFunction(this.option.data)) {
+                try{
+                    data = this.option.data.apply(this, [keyword]);
+                } catch(e) {
+                    _error.apply(this, ['调用data错误:'+e]);
+                    return;
+                }
+            } else if (typeof(this.option.data) === 'string') {
+                try{
+                    data = _ajaxSend.apply(this, [keyword]);
+                } catch(e) {
+                    _error.apply(this, ['Ajax错误:'+e]);
+                    return;
+                }
+            } else {
+                _error.apply(this, ['遇到未知的data参数！']);
+                return;
+            }
         }
 
         $.each(data, function(index, value){
