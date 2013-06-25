@@ -1,0 +1,528 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta http-equiv="content-type" content="text/html;charset=UTF-8" />
+    <title>Doc For AutoComplete.js</title>
+    <script type="text/javascript" src="../lib/jquery-1.7.1.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="../src/jquery.autocomplete.css"></link>
+    <script type="text/javascript" src="../src/jquery.autocomplete.min.js"></script>
+    <script src="../test/test.js"></script>
+    <link href="../lib/google-code-prettify/prettify.css" type="text/css" rel="stylesheet" />
+    <script type="text/javascript" src="../lib/google-code-prettify/prettify.js"></script>
+    <script src="../lib/google-code-prettify/beautify.min.js"></script>
+    <link href="doc.css" rel="stylesheet" type="text/css"/>
+    <script type="text/javascript">
+        var prepareDemo = function(input, pre, funcname){
+            var func = alltest[funcname],
+                code = $.browser.mozilla ? js_beautify(func+"") : func+"";
+
+            $(pre).text(code);
+
+            prettyPrint();
+
+            func.apply(this, [input]);
+        }
+
+        $(document).ready(function(){
+            // style
+            prepareDemo('#widthInput', '#widthPre', 'testWidth');
+            prepareDemo('#widthAutoInput', '#widthAutoPre', 'testWidthAuto');
+            prepareDemo('#maxHeightInput', '#maxHeightPre', 'testMaxHeight');
+            prepareDemo('#itemHeightInput', '#itemHeightPre', 'testItemHeight');
+            prepareDemo('#listStyleNormalInput', '#listStyleNormalPre', 'testListStyleNormal');
+            prepareDemo('#listStyleIconListInput', '#listStyleIconListPre', 'testIconList');
+            prepareDemo('#listStyleCustomInput', '#listStyleCustomPre', 'testListStyleCustom');
+            prepareDemo('#listDirectionDownInput', '#listDirectionDownPre', 'testDownDirection');
+            prepareDemo('#listDirectionUpInput', '#listDirectionUpPre', 'testUpDirection');
+            // data
+            prepareDemo('#dataArrayInput', '#dataArrayPre', 'testArrayAsData');
+            prepareDemo('#dataFunctionInput', '#dataFunctionPre', 'testFunctionAsData');
+            prepareDemo('#dataUrlInput', '#dataUrlPre', 'testAjaxJsonAsData');
+            $.get('../test/data.json', function(data){
+                $('#data\\.json').html(data);
+                prettyPrint();
+            }, 'html');
+            $.get('../test/data.xml', function(data){
+                $('#data\\.xml').html(data.replace(/</g, '&lt;').replace(/>/g, '&gt;'));
+                prettyPrint();
+            }, 'html');
+            prepareDemo('#ajaxDataTypeJsonInput', '#ajaxDataTypeJsonPre', 'testAjaxJsonAsData');
+            prepareDemo('#ajaxDataTypeXmlInput', '#ajaxDataTypeXmlPre', 'testAjaxXmlAsData');
+            prepareDemo('#maxItemsInput', '#maxItemsPre', 'testMaxItems');
+            
+            // event
+            prepareDemo('#matchHandlerInput', '#matchHandlerPre', 'testMatchHandler');
+            prepareDemo('#emphasisHandlerInput', '#emphasisHandlerPre', 'testEmphasisHandler');
+            prepareDemo('#createItemHandlerInput', '#createItemHandlerPre', 'testListStyleCustom');
+            prepareDemo('#beforeLoadDataHandlerInput', '#beforeLoadDataHandlerPre', 'testBeforeLoadData');
+            prepareDemo('#afterSelectedHandlerInput', '#afterSelectedHandlerPre', 'testAfterSelected');
+
+            // behavior
+            prepareDemo('#asyncInput', '#asyncPre', 'testAsyncTrue');
+
+            // sample
+            $('#sample').AutoComplete({
+                'data': ['One', 'Two', 'Three', 'Four', 'Five', 'Six', 'Seven', 'Eight', 'Nine', 'Ten', 'Eleven', 'Twelve']
+            });
+        });
+    </script>
+</head>
+<body>
+    <div id="sidebar" class="interface">
+        <a class="toc_title" href="#">
+	        jQuery.AutoComplete <span class="version">(1.1.2)</span>
+	    </a>
+
+	    <a class="toc_title" href="#">
+            简介
+	    </a>
+
+	    <a class="toc_title" href="#style">
+	      	样式
+	    </a>
+
+        <ul class="toc_section">
+            <li>- <a href="#width">width</a></li>
+        </ul>
+
+        <ul class="toc_section">
+            <li>- <a href="#maxHeight">maxHeight</a></li>
+        </ul>
+
+        <ul class="toc_section">
+            <li>- <a href="#itemHeight">itemHeight</a></li>
+        </ul>
+
+        <ul class="toc_section">
+            <li>- <a href="#listStyle">listStyle</a></li>
+        </ul>
+
+        <ul class="toc_section">
+            <li>- <a href="#listDirection">listDirection</a></li>
+        </ul>
+
+        <a class="toc_title" href="#dataSource">
+            数据
+        </a>
+
+        <ul class="toc_section">
+            <li>- <a href="#data">data</a></li>
+        </ul>
+
+        <ul class="toc_section">
+            <li>- <a href="#ajaxDataType">ajaxDataType</a></li>
+        </ul>
+
+        <ul class="toc_section">
+            <li>- <a href="#ajaxParams">ajaxParams</a></li>
+        </ul>
+
+        <ul class="toc_section">
+            <li>- <a href="#ajaxTimeout">ajaxTimeout</a></li>
+        </ul>
+
+        <ul class="toc_section">
+            <li>- <a href="#ajaxType">ajaxType</a></li>
+        </ul>
+
+        <ul class="toc_section">
+            <li>- <a href="#maxItems">maxItems</a></li>
+        </ul>
+
+        <a class="toc_title" href="#event">
+            事件
+        </a>
+
+        <ul class="toc_section">
+            <li>- <a href="#matchHandler">matchHandler</a></li>
+        </ul>
+
+        <ul class="toc_section">
+            <li>- <a href="#emphasisHandler">emphasisHandler</a></li>
+        </ul>
+        
+        <ul class="toc_section">
+            <li>- <a href="#createItemHandler">createItemHandler</a></li>
+        </ul>
+
+        <ul class="toc_section">
+            <li>- <a href="#beforeLoadDataHandler">beforeLoadDataHandler</a></li>
+        </ul>
+
+        <ul class="toc_section">
+            <li>- <a href="#afterSelectedHandler">afterSelectedHandler</a></li>
+        </ul>
+
+        <a class="toc_title" href="#event">
+            行为
+        </a>
+
+        <ul class="toc_section">
+            <li>- <a href="#async">async</a></li>
+        </ul>
+
+        <ul class="toc_section">
+            <li>- <a href="#emphasis">emphasis</a></li>
+        </ul>
+
+        <a class="toc_title" href="#debug">
+            调试
+        </a>
+
+        <ul class="toc_section">
+            <li>- <a href="#onerror">onerror</a></li>
+        </ul>
+ 
+         <a class="toc_title" href="#changelog">
+            ChangeLog
+        </a>
+
+        <ul class="toc_section">
+            <li><a href="#v1.1.2">v1.1.2</a></li>
+        </ul>
+
+        <ul class="toc_section">
+            <li><a href="#v1.1.1">v1.1.1</a></li>
+        </ul>
+
+        <ul class="toc_section">
+            <li><a href="#v1.1.0">v1.1.0</a></li>
+        </ul>
+
+    </div>
+
+	<div class="container">
+		<p>
+			jQuery.AutoComplete是一个基于jQuery的自动补全插件。借助于jQuery优秀的跨浏览器特性，可以兼容Chrome/IE/Firefox/Opera/Safari等多种浏览器。
+    	</p>
+        <p>
+            特性一览：
+            <ul>
+                <li>支持补全列表的宽度设定。</li>
+                <li>支持补全列表的最大高度设定。</li>
+                <li>支持补全列表的行数限制。</li>
+                <li>支持补全列表的显示位置及方向的设定。</li>
+                <li>支持自定义匹配规则。</li>
+                <li>支持匹配文本的渲染。</li>
+                <li>支持自定义匹配文本的渲染样式。</li>
+                <li>支持补全列表的样式设定。</li>
+                <li>支持自定义补全列表项的创建。</li>
+                <li>支持多种数据源。</li>
+                <li>支持'json'和'xml'两种数据格式。</li>
+                <li>支持异步处理。</li>
+                <li>支持错误调试。</li>
+                <li>支持jQuery1.7.1+。</li>
+            </ul>
+        </p>
+
+        在Html文件的&lt;/head&gt;标签之前，引入插件:
+        <pre class="prettyprint">
+&lt;script type="text/javascript" src="/path/to/jquery-1.7.1.min.js"&gt;&lt;/script&gt;            
+&lt;link rel="stylesheet" type="text/css" href="/path/to/jquery.autocomplete.css"&gt;&lt;/link&gt;
+&lt;script type="text/javascript" src="/path/to/jquery.autocomplete.js"&gt;&lt;/script&gt;</pre>
+
+        一个简单的例子: <input type="text" id="sample"></input>
+        <pre class="prettyprint">
+$('#sample').AutoComplete({
+    'data': ['One', 'Two', 'Three', 'Four', 'Five', 'Six', 'Seven', 'Eight', 'Nine', 'Ten', 'Eleven', 'Twelve']
+});</pre>
+        
+	    <p>
+	    	源代码已托管在<a href="http://github.com/nswish/jquery.autocomplete" target="_blank">Github</a>上，您可以把发现的bugs和希望扩展的features提交到<a href="http://github.com/nswish/jquery.autocomplete/issues" target="_blank">issues页面</a>。
+    	</p>
+
+	    <h2>直接下载: <i style="padding-left: 12px; font-size:12px;">(点击右键, 然后另存为)</i></h2>
+
+    	<table>
+      		<tr>
+        		<td><a href="../src/jquery.autocomplete.js">jquery.autocomplete.js (1.1.2)</a></td>
+        		<td><i>16kb, 未经压缩，带有注释</i></td>
+      		</tr>
+      		<tr>
+        		<td><a href="../src/jquery.autocomplete.min.js">jquery.autocomplete.min.js (1.1.2)</a></td>
+        		<td><i>8kb, 使用<a href="http://www.ostools.net/jscompress">开源中国在线工具</a>压缩</i></td>
+      		</tr>
+            <tr>
+                <td><a href="../src/jquery.autocomplete.css">jquery.autocomplete.css (1.1.2)</a></td>
+                <td><i>2kb</i></td>
+            </tr>            
+    	</table>
+
+    	<div id="documentation">
+      		<h2 id="style">样式</h2>
+
+      		<p id="width">
+        		<b class="header">width</b><span class="title">列表的宽度。</span><br />
+        		<span class="default"><tt>类型：数字，字符串</tt><tt>默认值: 320</tt><tt>单位: px</tt></span>
+        		<br />
+                当列表宽度不足以容纳下列表项的内容时，列表项的文本以折行的方式显示。可以通过设定足够大的列表宽度，避免折行的发生。<br />
+                <a href="#v1.1.0">[since v1.1.0]</a>如果设定 width 为 'auto'，那么补全列表的宽度与输入框的宽度一致。
+      		</p>
+            示例: 宽度设为数字 <input id="widthInput" type="text"></input>
+      		<pre id="widthPre" class="prettyprint">
+			</pre>
+
+            示例: 宽度设为'auto' <input id="widthAutoInput" type="text"></input>
+            <pre id="widthAutoPre" class="prettyprint">
+            </pre>            
+
+            <p id="maxHeight">
+                <b class="header">maxHeight</b><span class="title">列表的最大高度。</span><br />
+                <span class="default"><tt>类型：数字</tt><tt>默认值: null</tt><tt>单位: px</tt></span>
+                <br />
+                限制列表的高度不能大于某个值。当列表实际长度大于限制值时，显示纵向滚动轴。
+            </p>
+            示例: <input id="maxHeightInput" type="text"></input>
+            <pre id="maxHeightPre" class="prettyprint">
+            </pre>
+
+            <p id="itemHeight">
+                <b class="header">itemHeight</b><span class="title">列表项的高度。</span><br />
+                <span class="default"><tt>类型：数字</tt><tt>默认值: null</tt><tt>单位: px</tt></span>
+                <br />
+            </p>
+            示例: <input id="itemHeightInput" type="text"></input>
+            <pre id="itemHeightPre" class="prettyprint">
+            </pre>
+
+            <p id="listStyle">
+                <b class="header">listStyle</b><span class="title">列表的样式。</span><br />
+                <span class="default"><tt>类型：字符串</tt><tt>默认值: 'normal'</tt><tt>范围: ['normal', 'iconList', 'custom']</tt></span>
+                <br />
+                'normal': 普通文本样式。
+                <br />
+                'iconList': 左边是图标右边是文本的样式。
+                <br />
+                'custom': 自定义样式。须配合<a href="../doc/index.html#createItemHandler">createItemHandler参数</a>一起使用。
+            </p>
+            示例: 'normal': <input id="listStyleNormalInput" type="text"></input>
+            <pre id="listStyleNormalPre" class="prettyprint">
+            </pre>
+
+            示例: 'iconList': <input id="listStyleIconListInput" type="text"></input>
+            <pre id="listStyleIconListPre" class="prettyprint">
+            </pre>
+
+            示例: 'custom': <input id="listStyleCustomInput" type="text"></input>
+            <pre id="listStyleCustomPre" class="prettyprint">
+            </pre>
+
+            <p id="listDirection">
+                <b class="header">listDirection</b><span class="title">列表的位置和方向。</span><br />
+                <span class="default"><tt>类型：字符串</tt><tt>默认值: 'down'</tt><tt>范围: ['down', 'up']</tt></span>
+                <br />
+                'down': 列表会显示在输入框的下方。
+                <br />
+                'up': 列表会显示在输入框的上方。<i style="color:gray;">(注:在某些情况下，通过设定列表项高度[itemHeight]，可帮助正确定位列表的显示位置)</i>
+            </p>
+            示例: 'down': <input id="listDirectionDownInput" type="text"></input>
+            <pre id="listDirectionDownPre" class="prettyprint">
+            </pre>
+
+            示例: 'up': <input id="listDirectionUpInput" type="text"></input>
+            <pre id="listDirectionUpPre" class="prettyprint">
+            </pre>
+
+            <h2 id="dataSource">数据</h2>
+
+            <p id="data">
+                <b class="header">data</b><span class="title">数据源。</span><br />
+                <span class="default"><tt>类型：数组，函数，Url字符串</tt><tt>默认值: []</tt></span>
+                <br />
+                输入框中每次发生按件抬起事件(除某些被忽略的按键，如上下左右键)时，AutoComplete都会从数据源中搜寻符合匹配规则的数据作为列表的项。                
+                <ul>
+                    <li>数组: 可以直接把数组作为数据源。数组中的元素可以是字符串，也可以是一个js对象(包含label和value属性。在列表样式是'iconList'时需要image属性)。</li>
+                    <li>函数: 将数组作为返回值的函数。</li>
+                    <li>Url字符串: 远程或本地的Url字符串。AutoComplete以ajax方式访问Url指向的数据服务。</li>
+                </ul>
+            </p>            
+            示例: 数组作为数据源 <input id="dataArrayInput" type="text"></input>
+            <pre id="dataArrayPre" class="prettyprint">
+            </pre>
+
+            示例: 函数作为数据源 <input id="dataFunctionInput" type="text"></input>
+            <pre id="dataFunctionPre" class="prettyprint">
+            </pre>
+
+            示例: Url字符串作为数据源 <input id="dataUrlInput" type="text"></input>
+            <pre id="dataUrlPre" class="prettyprint">
+            </pre>
+
+            <p id="ajaxDataType">
+                <b class="header">ajaxDataType</b><span class="title">Ajax返回数据的格式。</span><br />
+                <span class="default"><tt>类型：字符串</tt><tt>默认值: 'json'</tt><tt>范围: ['json', 'xml']</tt></span>
+                <br />
+                指导AutoComplete如何对返回数据做解析，同时也作为jQuery.ajax函数的dataType参数,。
+                <ul>
+                    <li>'json': 样例格式
+                        <pre id="data.json" class="prettyprint" style="margin-top:3px;margin-bottom:5px;"></pre>
+                    </li>
+                    <li>'xml': 样例格式
+                        <pre id="data.xml" class="prettyprint" style="margin-top:3px;margin-bottom:5px;"></pre>
+                    </li>
+                </ul>
+            </p>
+            示例: json <input id="ajaxDataTypeJsonInput" type="text"></input>
+            <pre id="ajaxDataTypeJsonPre" class="prettyprint">
+            </pre>
+
+            示例: xml <input id="ajaxDataTypeXmlInput" type="text"></input>
+            <pre id="ajaxDataTypeXmlPre" class="prettyprint">
+            </pre>
+
+            <p id="ajaxParams">
+                <b class="header">ajaxParams</b><span class="title">Ajax发送给服务器的数据。</span><br />
+                <span class="default"><tt>类型：对象，函数，字符串</tt><tt>默认值: {'keyword': 输入框中的值}</tt></span>
+                <br />
+                作为jQuery.ajax函数中的data参数。
+                <ul>
+                    <li>对象: 请参考jQuery.ajax函数的data参数的描述。</li>
+                    <li>函数: 把js对象作为返回值的函数。</li>
+                    <li>字符串: 请参考jQuery.ajax函数的data参数的描述。</li>
+                </ul>
+            </p>
+
+            <p id="ajaxTimeout">
+                <b class="header">ajaxTimeout</b><span class="title">Ajax的超时。</span><br />
+                <span class="default"><tt>类型：数字</tt><tt>默认值: 3000</tt><tt>单位: 毫秒</tt></span>
+                <br />
+                作为jQuery.ajax函数中的timeout参数。
+            </p>
+
+            <p id="ajaxType">
+                <b class="header">ajaxType</b><span class="title">Ajax访问服务器的HTTP(s)方法(method)。</span><br />
+                <span class="default"><tt>类型：字符串</tt><tt>默认值: 'GET'</tt><tt>范围: ['GET', 'POST']</tt></span>
+                <br />
+                作为jQuery.ajax函数中的type参数。
+            </p>
+
+            <p id="maxItems">
+                <b class="header">maxItems</b><span class="title">列表的最大项数。</span><br />
+                <span class="default"><tt>类型：数字</tt><tt>默认值: 20</tt></span>
+                <br />
+                作用类似<a href="../doc/index.html#maxHeight">maxHeight参数</a>，用来限制列表的高度。
+            </p>
+            示例: <input id="maxItemsInput" type="text"></input>
+            <pre id="maxItemsPre" class="prettyprint">
+            </pre>
+
+            <h2 id="event">事件</h2>
+
+            <p id="matchHandler">
+                <b class="header">matchHandler</b><span class="title">发生匹配处理时的回调函数。</span><br />
+                <span class="default"><tt>类型：函数</tt></span>
+                <br />
+                通过此回调函数，可以实现自定义的匹配规则。在匹配的过程中，数据源中的每一个数据项都会触发一次此回调函数。
+                <br />
+                <pre class="prettyprint" style="margin-top:0px;margin-bottom:5px;">function matchHandler(keyword, data)</pre>                
+                <ul>
+                    <li>参数keyword是输入框中的值。</li>
+                    <li>参数data是数据源中的一个数据项。</li>
+                    <li>返回true，表示当前数据项匹配。</li>
+                </ul>
+            </p>
+            示例: <input id="matchHandlerInput" type="text"></input>
+            <pre id="matchHandlerPre" class="prettyprint">
+            </pre>
+
+            <p id="emphasisHandler">
+                <b class="header">emphasisHandler</b><span class="title">在渲染匹配内容时的回调函数。</span><br />
+                <span class="default"><tt>类型：函数</tt></span>
+                <br />
+                通过此函数，可以实现自定义的匹配内容渲染。每个匹配成功的数据项都会触发一次此回调函数。
+                <br />
+                <pre class="prettyprint" style="margin-top:0px;margin-bottom:5px;">function emphasisHandler(keyword, data)</pre>                
+                <ul>
+                    <li>参数keyword是输入框中的值。</li>
+                    <li>参数data是数据源中的一个数据项。</li>
+                    <li>修改data.label中的内容，即可改变列表项的内容显示。</li>
+                </ul>
+            </p>
+            示例: <input id="emphasisHandlerInput" type="text"></input>
+            <pre id="emphasisHandlerPre" class="prettyprint">
+            </pre>
+
+            <p id="createItemHandler">
+                <b class="header">createItemHandler</b><span class="title">在创建列表项时的回调函数。</span><br />
+                <span class="default"><tt>类型：函数</tt></span>
+                <br />
+                当<a href="../doc/index.html#listStyle">listStyle参数</a>设置为'custom'时，AutoComplete会调用此回调函数获取列表项的内容。
+            </p>
+            示例: <input id="createItemHandlerInput" type="text"></input>
+            <pre id="createItemHandlerPre" class="prettyprint">
+            </pre>
+
+            <p id="beforeLoadDataHandler">
+                <b class="header">beforeLoadDataHandler</b><span class="title">在每次输入之后装载数据之前的回调函数。<a href="#v1.1.1">[since v1.1.1]</a></span><br />
+                <span class="default"><tt>类型：函数</tt></span>
+                <br />
+                在输入框中每输入一个有效字符，控件都会发起一次数据请求并装载之。beforeLoadDataHandler在输入发生之后，数据请求和装载之前被调用，输入框中的值会作为参数传递给回调函数。如果回调函数的返回值为false，则控件取消随后的数据请求和装载动作。
+            </p>
+            示例: <input id="beforeLoadDataHandlerInput" type="text"></input>
+            <pre id="beforeLoadDataHandlerPre" class="prettyprint">
+            </pre>
+
+            <p id="afterSelectedHandler">
+                <b class="header">afterSelectedHandler</b><span class="title">在列表项被选择之后的回调函数。<a href="#v1.1.2">[since v1.1.2]</a></span><br />
+                <span class="default"><tt>类型：函数</tt></span>
+                <br />
+                无论是使用键盘还是鼠标来选择列表项，都会触发这个回调函数。控件首先将用户选中列表项的值放置到输入框中，然后调起回调函数，将绑定在这个列表项上的数据传递给它。
+            </p>
+            示例: <input id="afterSelectedHandlerInput" type="text"></input>
+            <pre id="afterSelectedHandlerPre" class="prettyprint">
+            </pre>
+
+            <h2 id="behavior">行为</h2>
+
+            <p id="async">
+                <b class="header">async</b><span class="title">是否异步。</span><br />
+                <span class="default"><tt>类型：布尔值</tt><tt>默认值: false</tt></span>
+                <br />
+                AutoComplete将“输入框按键抬起 => 从数据源获取数据 => 匹配处理 => 匹配渲染处理 => 列表生成并显示”这5步作为一次处理过程。
+                <br />
+                在同步的设置下，一个过程完成之后，才会开始第二个过程。如果数据源来自较慢的网络，亦或过程较为耗时，用户会感到一定的延时阻塞；
+                <br />
+                在异步的设置下，不用等待第一个过程完成，第二个过程就可以立即开始，因此没有阻塞发生且有助于改善用户的体验。多个过程同时执行时，AutoComplete会自动判别哪个是有效过程，忽略其他无效过程。
+            </p>
+            示例: <input id="asyncInput" type="text"></input>
+            <pre id="asyncPre" class="prettyprint">
+            </pre>
+
+            <p id="emphasis">
+                <b class="header">emphasis</b><span class="title">是否渲染匹配文本。</span><br />
+                <span class="default"><tt>类型：布尔值</tt><tt>默认值: true</tt></span>
+                <br />
+            </p>
+
+            <h2 id="debug">调试</h2>
+
+            <p id="onerror">
+                <b class="header">onerror</b><span class="title">遇到错误时的回调函数</span><br />
+                <span class="default"><tt>类型：函数</tt></span>
+                <br />
+                遇到错误时，AutoComplete默认采取静默方式处理。通过设置此回调函数，可以获取到错误发生的信息。
+                <pre class="prettyprint" style="margin-top:0px;margin-bottom:5px;">function onerror(msg)</pre> 
+            </p>
+            <p style="margin-top:60px;">jQuery.AutoComplete使用<a href="http://www.sublimetext.com/">Sublime Text 2</a>完成所有代码、样例及文档的编写。</p>
+
+            <h2 id="changelog">ChangeLog</h2>
+
+            <h3 id='v1.1.2'>v1.1.2</h3>
+            <ul>
+                <li>增加了一个列表项被选择之后的事件</li>
+            </ul>
+
+            <h3 id='v1.1.1'>v1.1.1</h3>
+            <ul>
+                <li>增加了一个输入发生之后数据请求装载之前的事件</li>
+            </ul>
+
+            <h3 id='v1.1.0'>v1.1.0</h3>
+            <ul>
+                <li>当参数width设定为'auto'时，补全列表的宽度可自动适配输入框的宽度。</li>
+            </ul>
+
+        </div>
+    </div>
+</body>
+</html>

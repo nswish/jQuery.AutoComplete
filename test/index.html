@@ -1,0 +1,65 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <script type="text/javascript" src="../lib/jquery-1.7.1.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="../src/jquery.autocomplete.css"></link>
+    <script type="text/javascript" src="../src/jquery.autocomplete.js"></script>
+    <script src="../test/test.js"></script>
+    <link href="../lib/google-code-prettify/prettify.css" type="text/css" rel="stylesheet" />
+    <script type="text/javascript" src="../lib/google-code-prettify/prettify.js"></script>
+    <script type="text/javascript" src="../lib/google-code-prettify/beautify.min.js"></script>
+    <style>
+        body {
+            background: #f4f4f4;
+            color: #000;
+            font-family: Helvetica Neue, Helvetica, Arial;
+        }
+    </style>
+    <script>
+        var prepareTest = function(input, funcname){            
+            $('input[type=button]').css('color', 'black');
+            $(input).css('color', 'red');
+
+            $('#testinput').AutoComplete('destroy');
+
+            var func = alltest[funcname],
+                code = $.browser.mozilla ? js_beautify(func+"") : func+"";
+
+            $('#code').text(code);
+
+            prettyPrint();
+
+            func.apply(this, ['#testinput']);
+        }
+    </script>
+</head>
+<body>
+    <div style="width:100%;">
+        <input type="button" value="测试：以数组作为数据源" onclick="prepareTest(this, 'testArrayAsData');"></input>
+        <input type="button" value="测试：以函数作为数据源" onclick="prepareTest(this, 'testFunctionAsData');"></input>
+        <input type="button" value="测试：以Ajax作为数据源(json)" onclick="prepareTest(this, 'testAjaxJsonAsData');"></input>
+        <input type="button" value="测试：以Ajax作为数据源(xml)" onclick="prepareTest(this, 'testAjaxXmlAsData');"></input>
+        <input type="button" value="测试：宽度设定(300px)" onclick="prepareTest(this, 'testWidth');"></input>
+        <input type="button" value="测试：宽度设定(auto)" onclick="prepareTest(this, 'testWidthAuto');"></input>
+        <input type="button" value="测试：列表项高度设定" onclick="prepareTest(this, 'testItemHeight');"></input>
+        <input type="button" value="测试：最大高度设定" onclick="prepareTest(this, 'testMaxHeight');"></input>
+        <input type="button" value="测试：最大项数设定" onclick="prepareTest(this, 'testMaxItems');"></input>
+        <input type="button" value="测试：上拉列表" onclick="prepareTest(this, 'testUpDirection');"></input>
+        <input type="button" value="测试：下拉列表" onclick="prepareTest(this, 'testDownDirection');"></input>
+        <input type="button" value="测试：普通列表样式" onclick="prepareTest(this, 'testListStyleNormal');"></input>
+        <input type="button" value="测试：图标列表样式" onclick="prepareTest(this, 'testIconListUp');"></input>
+        <input type="button" value="测试：自定义列表样式" onclick="prepareTest(this, 'testListStyleCustom');"></input>
+        <input type="button" value="测试：在AutoComplete登记销毁后，其他非AutoComplete注册的事件句柄仍然存在" onclick="prepareTest(this, 'testOtherHandlersExistAfterDestroy');"></input>
+        <input type="button" value="测试：自定义匹配函数" onclick="prepareTest(this, 'testMatchHandler');"></input>
+        <input type="button" value="测试：自定义匹配渲染函数" onclick="prepareTest(this, 'testEmphasisHandler');"></input>
+        <input type="button" value="测试：异步" onclick="prepareTest(this, 'testAsyncTrue');"></input>
+        <input type="button" value="测试：数据装载事件(前置)" onclick="prepareTest(this, 'testBeforeLoadData');"></input>
+        <input type="button" value="测试：选择事件(后置)" onclick="prepareTest(this, 'testAfterSelected');"></input>
+    </div>
+    <div style="width:100%;">
+        <pre id="code" class="prettyprint"></pre>
+        <label for="testinput">testinput:</label><input type="text" id="testinput" name="testinput"></input>
+    </div>
+</body>
+</html>
