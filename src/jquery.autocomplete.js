@@ -1,5 +1,5 @@
 /*
-* jQuery.autocomplete.js (v1.1.1)
+* jQuery.autocomplete.js (v1.1.2)
 * authored by nswish (nswish@gmail.com)
 * jQuery 1.7.1+ support
 * compatible: ie/chrome/firefox/opera/safari
@@ -53,6 +53,7 @@
             'emphasisHandler': defaultEmphasisHandler,      // function
             'createItemHandler': null,                      // function
             'beforeLoadDataHandler': null,                  // function
+            'afterSelectedHandler': null,                   // function
             // behavior
             'async': false,                                 // bool
             'emphasis': true,                               // bool
@@ -150,7 +151,7 @@
         };
 
         $.each(result, function(index, data){
-            var item = $("<li><div></div></li>").appendTo(container).addClass(that.option.listStyle).attr("val", data.value).find("div");
+            var item = $("<li><div></div></li>").appendTo(container).addClass(that.option.listStyle).data("data", data).find("div");
 
             switch(that.option.listStyle){
                 case 'normal':
@@ -254,10 +255,23 @@
     };
 
     var _select = function(){
-        var selected = this.searchView.find('li.selected');
+        var that = this,
+            selected = this.searchView.find('li.selected');
         
         if (selected.size()) {
-            this.inputView.val(selected.attr('val'));
+            var data = selected.data('data');
+
+            this.inputView.val(data.value);
+
+            if ($.isFunction(this.option.afterSelectedHandler)) {
+                try{
+                    this.option.afterSelectedHandler.apply(that, [data]);
+                } catch(e) {
+                    _error.apply(this, ['调用afterSelectedHandler错误:'+e]);
+                    return;
+                }
+            }
+
             _emptySearchView.apply(this);
         }
     };

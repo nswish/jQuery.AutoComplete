@@ -49,11 +49,14 @@
             prepareDemo('#ajaxDataTypeJsonInput', '#ajaxDataTypeJsonPre', 'testAjaxJsonAsData');
             prepareDemo('#ajaxDataTypeXmlInput', '#ajaxDataTypeXmlPre', 'testAjaxXmlAsData');
             prepareDemo('#maxItemsInput', '#maxItemsPre', 'testMaxItems');
+            
             // event
             prepareDemo('#matchHandlerInput', '#matchHandlerPre', 'testMatchHandler');
             prepareDemo('#emphasisHandlerInput', '#emphasisHandlerPre', 'testEmphasisHandler');
             prepareDemo('#createItemHandlerInput', '#createItemHandlerPre', 'testListStyleCustom');
             prepareDemo('#beforeLoadDataHandlerInput', '#beforeLoadDataHandlerPre', 'testBeforeLoadData');
+            prepareDemo('#afterSelectedHandlerInput', '#afterSelectedHandlerPre', 'testAfterSelected');
+
             // behavior
             prepareDemo('#asyncInput', '#asyncPre', 'testAsyncTrue');
 
@@ -67,7 +70,7 @@
 <body>
     <div id="sidebar" class="interface">
         <a class="toc_title" href="#">
-	        jQuery.AutoComplete <span class="version">(1.1.1)</span>
+	        jQuery.AutoComplete <span class="version">(1.1.2)</span>
 	    </a>
 
 	    <a class="toc_title" href="#">
@@ -146,6 +149,10 @@
             <li>- <a href="#beforeLoadDataHandler">beforeLoadDataHandler</a></li>
         </ul>
 
+        <ul class="toc_section">
+            <li>- <a href="#afterSelectedHandler">afterSelectedHandler</a></li>
+        </ul>
+
         <a class="toc_title" href="#event">
             行为
         </a>
@@ -171,7 +178,11 @@
         </a>
 
         <ul class="toc_section">
-            <li><a href="#v1.1.0">v1.1.1</a></li>
+            <li><a href="#v1.1.2">v1.1.2</a></li>
+        </ul>
+
+        <ul class="toc_section">
+            <li><a href="#v1.1.1">v1.1.1</a></li>
         </ul>
 
         <ul class="toc_section">
@@ -224,15 +235,15 @@ $('#sample').AutoComplete({
 
     	<table>
       		<tr>
-        		<td><a href="../src/jquery.autocomplete.js">jquery.autocomplete.js (1.1.1)</a></td>
+        		<td><a href="../src/jquery.autocomplete.js">jquery.autocomplete.js (1.1.2)</a></td>
         		<td><i>16kb, 未经压缩，带有注释</i></td>
       		</tr>
       		<tr>
-        		<td><a href="../src/jquery.autocomplete.min.js">jquery.autocomplete.min.js (1.1.1)</a></td>
+        		<td><a href="../src/jquery.autocomplete.min.js">jquery.autocomplete.min.js (1.1.2)</a></td>
         		<td><i>8kb, 使用<a href="http://www.ostools.net/jscompress">开源中国在线工具</a>压缩</i></td>
       		</tr>
             <tr>
-                <td><a href="../src/jquery.autocomplete.css">jquery.autocomplete.css (1.1.1)</a></td>
+                <td><a href="../src/jquery.autocomplete.css">jquery.autocomplete.css (1.1.2)</a></td>
                 <td><i>2kb</i></td>
             </tr>            
     	</table>
@@ -451,6 +462,16 @@ $('#sample').AutoComplete({
             <pre id="beforeLoadDataHandlerPre" class="prettyprint">
             </pre>
 
+            <p id="afterSelectedHandler">
+                <b class="header">afterSelectedHandler</b><span class="title">在列表项被选择之后的回调函数。<a href="#v1.1.2">[since v1.1.2]</a></span><br />
+                <span class="default"><tt>类型：函数</tt></span>
+                <br />
+                无论是使用键盘还是鼠标来选择列表项，都会触发这个回调函数。控件首先将用户选中列表项的值放置到输入框中，然后调起回调函数，将绑定在这个列表项上的数据传递给它。
+            </p>
+            示例: <input id="afterSelectedHandlerInput" type="text"></input>
+            <pre id="afterSelectedHandlerPre" class="prettyprint">
+            </pre>
+
             <h2 id="behavior">行为</h2>
 
             <p id="async">
@@ -485,6 +506,11 @@ $('#sample').AutoComplete({
             <p style="margin-top:60px;">jQuery.AutoComplete使用<a href="http://www.sublimetext.com/">Sublime Text 2</a>完成所有代码、样例及文档的编写。</p>
 
             <h2 id="changelog">ChangeLog</h2>
+
+            <h3 id='v1.1.2'>v1.1.2</h3>
+            <ul>
+                <li>增加了一个列表项被选择之后的事件</li>
+            </ul>
 
             <h3 id='v1.1.1'>v1.1.1</h3>
             <ul>

@@ -54,7 +54,8 @@
         <input type="button" value="测试：自定义匹配函数" onclick="prepareTest(this, 'testMatchHandler');"></input>
         <input type="button" value="测试：自定义匹配渲染函数" onclick="prepareTest(this, 'testEmphasisHandler');"></input>
         <input type="button" value="测试：异步" onclick="prepareTest(this, 'testAsyncTrue');"></input>
-        <input type="button" value="测试：数据装载前置事件" onclick="prepareTest(this, 'testBeforeLoadData');"></input>
+        <input type="button" value="测试：数据装载事件(前置)" onclick="prepareTest(this, 'testBeforeLoadData');"></input>
+        <input type="button" value="测试：选择事件(后置)" onclick="prepareTest(this, 'testAfterSelected');"></input>
     </div>
     <div style="width:100%;">
         <pre id="code" class="prettyprint"></pre>

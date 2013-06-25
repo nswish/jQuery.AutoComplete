@@ -148,7 +148,7 @@ alltest.testOtherHandlersExistAfterDestroy = function(input){
     $(input).AutoComplete({
         'data': ['One', 'Two', 'Three', 'Four', 'Five', 'Six', 'Seven', 'Eight', 'Nine', 'Ten', 'Eleven', 'Twelve']
     }).bind('keyup', function(){
-        $(this).after('exist');
+        $(this).after('exist.');
     }).AutoComplete('destroy');
 };
 
@@ -185,6 +185,16 @@ alltest.testBeforeLoadData = function(input){
         'async': true,
         'beforeLoadDataHandler' : function(keyword){
             return keyword.length > 3;
+        },
+        'onerror': function(msg){alert(msg);}
+    });
+};
+
+alltest.testAfterSelected = function(input){
+    $(input).AutoComplete({
+        'data': ['One', 'Two', 'Three', 'Four', 'Five', 'Six', 'Seven', 'Eight', 'Nine', 'Ten', 'Eleven', 'Twelve'],
+        'afterSelectedHandler': function(data){
+            alert(data.value);
         },
         'onerror': function(msg){alert(msg);}
     });
